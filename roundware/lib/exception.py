@@ -1,5 +1,6 @@
-# Roundware Server is released under the GNU Lesser General Public License.
+# Roundware Server is released under the GNU Affero General Public License v3.
 # See COPYRIGHT.txt, AUTHORS.txt, and LICENSE.txt in the project root directory.
+
 
 class RoundException (Exception):
 
@@ -7,4 +8,7 @@ class RoundException (Exception):
         self.message = message
 
     def __str__(self):
-        return repr(self.message)
+        return self.message
+
+    def __unicode__(self):
+        return self.message

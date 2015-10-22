@@ -1,4 +1,4 @@
-# Roundware Server is released under the GNU Lesser General Public License.
+# Roundware Server is released under the GNU Affero General Public License v3.
 # See COPYRIGHT.txt, AUTHORS.txt, and LICENSE.txt in the project root directory.
 
 from __future__ import unicode_literals
@@ -12,7 +12,7 @@ import time
 import urllib
 from django.conf import settings
 from roundware.rw import models
-from roundware.api1.commands import log_event
+from roundware.lib.api import log_event
 from roundwared.audiotrack import AudioTrack
 from roundwared import icecast2
 from roundwared import gpsmixer

@@ -1,4 +1,4 @@
-# Roundware Server is released under the GNU Lesser General Public License.
+# Roundware Server is released under the GNU Affero General Public License v3.
 # See COPYRIGHT.txt, AUTHORS.txt, and LICENSE.txt in the project root directory.
 
 from __future__ import unicode_literals
@@ -54,8 +54,8 @@ def project_restricted_queryset_through(model_class, field_name):
     original_queryset.filter(asset__in=Asset.objects.filter(project__in=accessible_projects)
     """
 
-    def queryset(self, request):
-        qset = super(admin.ModelAdmin, self).queryset(request)
+    def get_queryset(self, request):
+        qset = super(admin.ModelAdmin, self).get_queryset(request)
 
         if request.user.is_superuser:
             return qset
@@ -65,7 +65,7 @@ def project_restricted_queryset_through(model_class, field_name):
         authorized_objects = model_class.objects.filter(
             project__in=accessible_projects)
         return qset.filter(**{field_name + "__in": authorized_objects})
-    return queryset
+    return get_queryset
 
 
 class ProjectProtectedThroughAssetModelAdmin(admin.ModelAdmin):
@@ -82,8 +82,8 @@ class ProjectProtectedThroughUIModelAdmin(admin.ModelAdmin):
 
 class ProjectProtectedModelAdmin(admin.ModelAdmin):
 
-    def queryset(self, request):
-        qset = super(admin.ModelAdmin, self).queryset(request)
+    def get_queryset(self, request):
+        qset = super(admin.ModelAdmin, self).get_queryset(request)
 
         if request.user.is_superuser:
             return qset
@@ -279,8 +279,8 @@ class ProjectAdmin(GuardedModelAdmin):
         }),
         ('Configuration', {
             'fields': ('listen_enabled', 'geo_listen_enabled', 'speak_enabled', 'geo_speak_enabled',
-                       'demo_stream_enabled', 'reset_tag_defaults_on_startup', 'max_recording_length',
-                       'recording_radius', 'audio_stream_bitrate', 'sharing_url',
+                       'demo_stream_enabled', 'reset_tag_defaults_on_startup', 'timed_asset_priority',
+                       'max_recording_length', 'recording_radius', 'audio_stream_bitrate', 'sharing_url',
                        'out_of_range_url', 'demo_stream_url', 'files_url', 'files_version', 'repeat_mode', 'ordering')
         }),
         ('Localized Strings', {

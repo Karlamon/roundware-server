@@ -1,4 +1,4 @@
-# Roundware Server is released under the GNU Lesser General Public License.
+# Roundware Server is released under the GNU Affero General Public License v3.
 # See COPYRIGHT.txt, AUTHORS.txt, and LICENSE.txt in the project root directory.
 
 
@@ -17,12 +17,11 @@ router.register(r'events', views.EventViewSet)
 router.register(r'listenevents', views.ListenEventViewSet)
 router.register(r'projects', views.ProjectViewSet)
 router.register(r'sessions', views.SessionViewSet)
-router.register(r'stream', views.StreamViewSet, base_name="Stream")
+router.register(r'streams', views.StreamViewSet, base_name="Stream")
 router.register(r'tags', views.TagViewSet)
+router.register(r'users', views.UserViewSet)
+router.register(r'envelopes', views.EnvelopeViewSet)
 
 urlpatterns = patterns('',
     url(r'^', include(router.urls)),
-    url(r'^obtain_token/', 'rest_framework.authtoken.views.obtain_auth_token'),
-    url(r'^auth/', include('rest_framework.urls',
-                              namespace='rest_framework')),
 )
